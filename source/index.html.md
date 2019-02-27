@@ -2,10 +2,7 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
   - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -19,119 +16,53 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+This is the official documentation for Liquid Gold's API. This is meant to be private information and should not be shared.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Liquid Gold is the core API responsible for all fan-based interaction event tracking. At its core, Liquid Gold is responsible for point assignment and distribution. It allows any and all registered Team Liquid users to be rewarded for their interactions with Team Liquid whether that is via Twitch.tv, Youtube, Discord, Instragram, Facebook, and other social media platforms.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+The API only supports end points pertaining to a specific user specified. You cannot view points of more than one user at a time.
+
+To view the details of the interaction that awarded the points, that needs to be done through the API of the platform service.
 
 # Authentication
 
-> To authorize, use this code:
+To be updated.
 
-```ruby
-require 'kittn'
+# Points
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+## Get Points for a User
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
+This endpoint retrieves all points for a user.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://liquidgoldapi.com/api/v1/users/:user_id/points`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+start_date | nil | Takes string of format: MM//DD/YYYY. If entered, will only look for points accrued after and including start date
+end_date | nil | Takes string of format: MM//DD/YYYY. If entered, will only look for points accrued before and including end date
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+## Get Points for a User for a specific platform
+
+This endpoint retrieves all points for a user for a specific platform.
+
+### HTTP Request
+
+`GET http://liquidgoldapi.com/api/v1/users/:user_id/:platform/points`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+start_date | nil | Takes string of format: MM//DD/YYYY. If entered, will only look for points accrued after and including start date
+end_date | nil | Takes string of format: MM//DD/YYYY. If entered, will only look for points accrued before and including end date
+
+<!-- <aside class="success"> -->
+<!-- Remember — a happy kitten is an authenticated kitten! -->
+<!-- </aside> -->
 
 ## Get a Specific Kitten
 
